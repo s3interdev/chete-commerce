@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Store } from '../lib/store';
@@ -132,4 +133,5 @@ const CartPage = () => {
 	);
 };
 
-export default CartPage;
+/** export CartPage as a dynamic page to be rendered only on the client */
+export default dynamic(() => Promise.resolve(CartPage), { ssr: false });

@@ -1,10 +1,21 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Store } from '../lib/store';
 
 const NavigationHeader = () => {
 	const { state } = useContext(Store);
 	const { cart } = state;
+	const [cartItemsCount, setCartItemsCount] = useState(0);
+
+	/** render the component when number of cart items change */
+	useEffect(() => {
+		setCartItemsCount(
+			cart.cartItems.reduce(
+				(previousValue, currentValue) => previousValue + currentValue.quantity,
+				0
+			)
+		);
+	}, [cart.cartItems]);
 
 	return (
 		<nav className="relative shadow-md">
@@ -21,13 +32,9 @@ const NavigationHeader = () => {
 						<Link href="/cart">
 							<a className="p-2">
 								Cart
-								{cart.cartItems.length > 0 && (
+								{cartItemsCount > 0 && (
 									<span className="ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white">
-										{cart.cartItems.reduce(
-											(previousValue, currentValue) =>
-												previousValue + currentValue.quantity,
-											0
-										)}
+										{cartItemsCount}
 									</span>
 								)}
 							</a>
