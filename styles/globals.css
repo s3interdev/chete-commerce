@@ -26,4 +26,15 @@
 }
 
 @layer components {
+	.card {
+		@apply mb-5 block rounded-md border border-gray-300 shadow-md;
+	}
+
+	.primary-button {
+		@apply my-1 rounded bg-amber-300 py-2 px-4 shadow outline-none hover:bg-amber-500 active:bg-amber-500;
+	}
+
+	.dropdown-link {
+		@apply flex p-2 hover:bg-gray-300;
+	}
 }
