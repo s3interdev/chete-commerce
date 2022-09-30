@@ -1,9 +1,15 @@
+import { useContext } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { Store } from '../../lib/store';
 import Layout from '../../components/layout';
 import data from '../../data/data';
 
 const ProductPage = () => {
+	const { state, dispatch } = useContext(Store);
+
+	const router = useRouter();
+
 	const { query } = useRouter();
 	const { slug } = query;
 
@@ -12,6 +18,21 @@ const ProductPage = () => {
 	if (!product) {
 		return <div>The product was not found</div>;
 	}
+
+	const addToCartHandler = () => {
+		const existingItem = state.cart.cartItems.find((x) => x.slug === product.slug);
+		const quantity = existingItem ? existingItem.quantity + 1 : 1;
+
+		if (product.numberInStock < quantity) {
+			alert('Sorry, the product is out of stock');
+			return;
+		}
+
+		dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } });
+
+		/** take user to shopping cart page */
+		router.push('/cart');
+	};
 
 	return (
 		<Layout title={product.name}>
@@ -48,8 +69,10 @@ const ProductPage = () => {
 							{product.brand}
 						</li>
 						<li className="py-1">
-							{product.rating} <span className="font-semibold">in</span> {product.reviews}{' '}
-							<span className="font-semibold">reviews</span>
+							<span className="font-semibold">Rating: </span>
+							{product.rating} <span className="font-semibold">in </span>
+							{product.reviews}
+							<span className="font-semibold"> review</span>
 						</li>
 						<li className="py-1">
 							<span className="font-semibold">Description: </span>
@@ -70,7 +93,12 @@ const ProductPage = () => {
 							<div>Status</div>
 							<div>{product.numberInStock > 0 ? 'In stock' : 'Unavailable'}</div>
 						</div>
-						<button className="primary-button w-full uppercase">Add to cart</button>
+						<button
+							className="primary-button w-full uppercase"
+							onClick={addToCartHandler}
+						>
+							Add to cart
+						</button>
 					</div>
 				</div>
 				{/* call to action end */}
