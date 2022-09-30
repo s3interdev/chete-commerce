@@ -13,8 +13,15 @@ const CartPage = () => {
 		cart: { cartItems },
 	} = state;
 
+	/** remove item from cart */
 	const removeItemHandler = (item) => {
 		dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
+	};
+
+	/** update item in cart */
+	const updateCartHandler = (item, qty) => {
+		const quantity = Number(qty);
+		dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } });
 	};
 
 	const router = useRouter();
@@ -35,7 +42,7 @@ const CartPage = () => {
 				<div className="grid md:grid-cols-4 md:gap-5">
 					{/* shopping cart display table start */}
 					<div className="overflow-x-auto md:col-span-3">
-						<table className="min-w-full ">
+						<table className="min-w-full">
 							<thead className="border-b">
 								<tr>
 									<th className="p-5 text-left">Item</th>
@@ -62,7 +69,19 @@ const CartPage = () => {
 												</a>
 											</Link>
 										</td>
-										<td className="p-5 text-right">{item.quantity}</td>
+										<td className="p-5 text-right">
+											<select
+												value={item.quantity}
+												onChange={(e) => updateCartHandler(item, e.target.value)}
+												className="w-16"
+											>
+												{[...Array(item.numberInStock).keys()].map((i) => (
+													<option key={i + 1} value={i + 1}>
+														{i + 1}
+													</option>
+												))}
+											</select>
+										</td>
 										<td className="p-5 text-right">${item.price}</td>
 										<td className="p-5 text-center">
 											<button onClick={() => removeItemHandler(item)}>
