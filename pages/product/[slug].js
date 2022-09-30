@@ -7,6 +7,9 @@ import data from '../../data/data';
 
 const ProductPage = () => {
 	const { state, dispatch } = useContext(Store);
+
+	const router = useRouter();
+
 	const { query } = useRouter();
 	const { slug } = query;
 
@@ -26,6 +29,9 @@ const ProductPage = () => {
 		}
 
 		dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } });
+
+		/** take user to shopping cart page */
+		router.push('/cart');
 	};
 
 	return (
@@ -63,8 +69,10 @@ const ProductPage = () => {
 							{product.brand}
 						</li>
 						<li className="py-1">
-							{product.rating} <span className="font-semibold">in</span> {product.reviews}{' '}
-							<span className="font-semibold">reviews</span>
+							<span className="font-semibold">Rating: </span>
+							{product.rating} <span className="font-semibold">in </span>
+							{product.reviews}
+							<span className="font-semibold"> review</span>
 						</li>
 						<li className="py-1">
 							<span className="font-semibold">Description: </span>
