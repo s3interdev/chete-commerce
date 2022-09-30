@@ -7,7 +7,7 @@ const NavigationHeader = () => {
 				<div className="flex items-center justify-between px-4">
 					{/** logo section start */}
 					<Link href="/">
-						<a className="text-2xl font-bold">Chete</a>
+						<a className="text-2xl font-bold">Chete Men</a>
 					</Link>
 					{/** logo section end */}
 

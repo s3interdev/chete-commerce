@@ -16,8 +16,8 @@ const Layout = ({ title, children }) => {
 				<link rel="icon" type="image/png" href="/favicon.png" />
 				<title>
 					{title
-						? title + ' | Chete by Superior Software Solutions'
-						: ' | Chete by Superior Software Solutions'}
+						? title + ' | Chete Men by Superior Software Solutions'
+						: ' | Chete Men by Superior Software Solutions'}
 				</title>
 			</Head>
 
