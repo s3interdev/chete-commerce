@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { Store } from '../lib/store';
 
 const NavigationHeader = () => {
+	const { status, data: session } = useSession();
 	const { state } = useContext(Store);
 	const { cart } = state;
 	const [cartItemsCount, setCartItemsCount] = useState(0);
@@ -39,9 +41,16 @@ const NavigationHeader = () => {
 								)}
 							</a>
 						</Link>
-						<Link href="/signin">
-							<a className="p-2">Sign in</a>
-						</Link>
+
+						{status === 'loading' ? (
+							'Loading'
+						) : session?.user ? (
+							session.user.name
+						) : (
+							<Link href="/signin">
+								<a className="p-2">Sign in</a>
+							</Link>
+						)}
 					</div>
 					{/** navigation links end */}
 				</div>

@@ -1,5 +1,6 @@
 import Head from 'next/head';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import NavigationFooter from './navigation-footer';
 import NavigationHeader from './navigation-header';
 
@@ -20,6 +21,8 @@ const Layout = ({ title, children }) => {
 						: ' | Chete Men by Superior Software Solutions'}
 				</title>
 			</Head>
+
+			<ToastContainer position="bottom-center" limit={1} />
 
 			{/** body section start */}
 			<div className="flex min-h-screen flex-col justify-between">
