@@ -33,9 +33,9 @@ const CartPage = () => {
 
 			{cartItems.length === 0 ? (
 				<div>
-					Your cart is empty...{' '}
+					Your cart is empty,{' '}
 					<Link href="/">
-						<a className="primary-button uppercase">Please Buy Something</a>
+						<a className="hover:underline">please buy something.</a>
 					</Link>
 				</div>
 			) : (
@@ -117,7 +117,7 @@ const CartPage = () => {
 							</li>
 							<li>
 								<button
-									onClick={() => router.push('/shipping')}
+									onClick={() => router.push('signin?redirect=/shipping')}
 									className="primary-button w-full uppercase"
 								>
 									Check Out
