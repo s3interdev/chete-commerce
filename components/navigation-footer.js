@@ -3,7 +3,7 @@ const NavigationFooter = () => {
 
 	return (
 		<footer className="flex h-10 items-center justify-center shadow-inner">
-			<p>© {currentYear} Chete by Superior Software Solutions</p>
+			<p>© {currentYear} Chete Men by Superior Software Solutions</p>
 		</footer>
 	);
 };
