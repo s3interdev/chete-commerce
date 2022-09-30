@@ -1,11 +1,14 @@
 import { useContext, useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
+import Cookies from 'js-cookie';
+import { Menu } from '@headlessui/react';
 import { Store } from '../lib/store';
+import DropdownLink from './dropdown-link';
 
 const NavigationHeader = () => {
 	const { status, data: session } = useSession();
-	const { state } = useContext(Store);
+	const { state, dispatch } = useContext(Store);
 	const { cart } = state;
 	const [cartItemsCount, setCartItemsCount] = useState(0);
 
@@ -18,6 +21,12 @@ const NavigationHeader = () => {
 			)
 		);
 	}, [cart.cartItems]);
+
+	const signoutClickHandler = () => {
+		Cookies.remove('cart');
+		dispatch({ type: 'CART_RESET' });
+		signOut({ callbackUrl: '/signin' });
+	};
 
 	return (
 		<nav className="relative shadow-md">
@@ -45,7 +54,26 @@ const NavigationHeader = () => {
 						{status === 'loading' ? (
 							'Loading'
 						) : session?.user ? (
-							session.user.name
+							<Menu as="div" className="relative inline-block">
+								<Menu.Button className="text-blue-500">{session.user.name}</Menu.Button>
+								<Menu.Items className="absolute right-0 w-56 origin-top-right rounded bg-white shadow-lg">
+									<Menu.Item>
+										<DropdownLink className="dropdown-link" href="/profile">
+											Profile
+										</DropdownLink>
+									</Menu.Item>
+									<Menu.Item>
+										<DropdownLink className="dropdown-link" href="/order-history">
+											Order History
+										</DropdownLink>
+									</Menu.Item>
+									<Menu.Item>
+										<a className="dropdown-link" href="#" onClick={signoutClickHandler}>
+											Sign out
+										</a>
+									</Menu.Item>
+								</Menu.Items>
+							</Menu>
 						) : (
 							<Link href="/signin">
 								<a className="p-2">Sign in</a>
