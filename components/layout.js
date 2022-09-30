@@ -11,13 +11,13 @@ const Layout = ({ title, children }) => {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<meta
 					name="description"
-					content="Automate building of websites and web application projects using Next.JS and Tailwind CSS"
+					content="E-commerce web application built using Next.JS, Tailwind CSS and MongoDB"
 				/>
 				<link rel="icon" type="image/png" href="/favicon.png" />
 				<title>
 					{title
-						? title + ' | Superior Software Solutions'
-						: 'Superior Software Solutions'}
+						? title + ' | Chete by Superior Software Solutions'
+						: ' | Chete by Superior Software Solutions'}
 				</title>
 			</Head>
 
@@ -30,7 +30,7 @@ const Layout = ({ title, children }) => {
 				{/** header section start end */}
 
 				{/** main content section start */}
-				<main className="container m-auto mt-5 px-5">{children}</main>
+				<main className="container m-auto mt-4 px-4">{children}</main>
 				{/** main content section end */}
 
 				{/** footer section start start */}

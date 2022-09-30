@@ -2,23 +2,27 @@ import Link from 'next/link';
 
 const NavigationHeader = () => {
 	return (
-		<nav className="flex h-12 items-center justify-between px-[25px] shadow-md">
-			{/** logo section start */}
-			<Link href="/">
-				<a className="text-lg font-bold">Superior Software Solutions</a>
-			</Link>
-			{/** logo section end */}
+		<nav className="relative shadow-md">
+			<div className="container mx-auto py-4">
+				<div className="flex items-center justify-between px-4">
+					{/** logo section start */}
+					<Link href="/">
+						<a className="text-2xl font-bold">Chete</a>
+					</Link>
+					{/** logo section end */}
 
-			{/** navigation links start */}
-			<div>
-				<Link href="#">
-					<a className="p-2">About</a>
-				</Link>
-				<Link href="#">
-					<a className="p-2">Contact</a>
-				</Link>
+					{/** navigation links start */}
+					<div>
+						<Link href="/cart">
+							<a className="p-2">Cart</a>
+						</Link>
+						<Link href="/signin">
+							<a className="p-2">Sign in</a>
+						</Link>
+					</div>
+					{/** navigation links end */}
+				</div>
 			</div>
-			{/** navigation links end */}
 		</nav>
 	);
 };
