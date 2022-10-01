@@ -27,7 +27,7 @@ const PaymentPage = () => {
 		e.preventDefault();
 
 		if (!selectedPaymentMethod) {
-			return toast.error('A payment method is needed');
+			return toast.error('A payment method is required');
 		}
 
 		dispatch({ type: 'SAVE_PAYMENT_METHOD', payload: selectedPaymentMethod });
