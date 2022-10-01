@@ -72,7 +72,7 @@ const ProductPage = () => {
 							<span className="font-semibold">Rating: </span>
 							{product.rating} <span className="font-semibold">in </span>
 							{product.reviews}
-							<span className="font-semibold"> review</span>
+							<span className="font-semibold"> reviews</span>
 						</li>
 						<li className="py-1">
 							<span className="font-semibold">Description: </span>
