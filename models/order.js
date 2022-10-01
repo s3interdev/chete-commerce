@@ -25,8 +25,8 @@ const orderSchema = new mongoose.Schema(
 		totalCost: { type: Number, required: true },
 		isPaid: { type: Boolean, required: true, default: false },
 		isDelivered: { type: Boolean, required: true, default: false },
-		paidAt: { type: Date },
-		deliveredAt: { type: Date },
+		paidOn: { type: Date },
+		deliveredOn: { type: Date },
 	},
 	{
 		timestamps: true,

@@ -10,14 +10,14 @@ import Layout from '../components/layout';
 import { getError } from '../lib/error';
 import { Store } from '../lib/store';
 
-const PlaceorderPage = () => {
+const PlaceOrderPage = () => {
 	const { state, dispatch } = useContext(Store);
 	const { cart } = state;
 	const { cartItems, shippingAddress, paymentMethod } = cart;
 
-	const roundTwoDP = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
+	const roundTwoDecimalPoints = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
 
-	const itemsPrice = roundTwoDP(
+	const itemsPrice = roundTwoDecimalPoints(
 		cartItems.reduce(
 			(previousValue, currentValue) =>
 				previousValue + currentValue.quantity * currentValue.price,
@@ -26,11 +26,12 @@ const PlaceorderPage = () => {
 	);
 
 	const shippingCost = itemsPrice > 200 ? 0 : 15;
-	const tax = roundTwoDP(itemsPrice * 0.16);
-	const totalCost = roundTwoDP(itemsPrice + shippingCost + tax);
+	const tax = roundTwoDecimalPoints(itemsPrice * 0.16);
+	const totalCost = roundTwoDecimalPoints(itemsPrice + shippingCost + tax);
 
 	const router = useRouter();
 
+	/* check if payment method is defined */
 	useEffect(() => {
 		if (!paymentMethod) {
 			router.push('/payment');
@@ -216,4 +217,6 @@ const PlaceorderPage = () => {
 	);
 };
 
-export default PlaceorderPage;
+PlaceOrderPage.auth = true;
+
+export default PlaceOrderPage;
