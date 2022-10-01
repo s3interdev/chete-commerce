@@ -80,7 +80,6 @@ const SigninPage = () => {
 						})}
 						id="password"
 						className="w-full rounded"
-						autoFocus
 					></input>
 					{errors.password && (
 						<div className="mt-1 text-red-500">{errors.password.message}</div>
