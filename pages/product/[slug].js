@@ -38,7 +38,7 @@ const ProductPage = () => {
 		<Layout title={product.name}>
 			<div className="py-4">
 				<Link href="/">
-					<a className="primary-button uppercase">Back to Homepage</a>
+					<a className="default-button uppercase">Back to Homepage</a>
 				</Link>
 			</div>
 

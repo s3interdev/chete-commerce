@@ -33,6 +33,7 @@ const ShippingPage = () => {
 			type: 'SAVE_SHIPPING_ADDRESS',
 			payload: { fullName, address, city, postalCode, country },
 		});
+
 		Cookies.set(
 			'cart',
 			JSON.stringify({
@@ -55,7 +56,7 @@ const ShippingPage = () => {
 		<Layout title="Shipping Address">
 			<CheckoutWizard activeStep={1} />
 
-			{/*shipping form start */}
+			{/* shipping form start */}
 			<form className="mx-auto max-w-screen-sm" onSubmit={handleSubmit(submitHandler)}>
 				<h1 className="mb-5 text-xl">Shipping Address</h1>
 
@@ -132,7 +133,7 @@ const ShippingPage = () => {
 					<button className="primary-button uppercase">Next</button>
 				</div>
 			</form>
-			{/*shipping form end */}
+			{/* shipping form end */}
 		</Layout>
 	);
 };
