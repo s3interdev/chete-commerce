@@ -1,6 +1,7 @@
 import { useEffect, useReducer } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
+import { format, parseISO } from 'date-fns';
 import Layout from '../components/layout';
 import { getError } from '../lib/error';
 
@@ -65,19 +66,23 @@ const OrderHistoryPage = () => {
 							{orders.map((order) => (
 								<tr key={order._id} className="border-b">
 									<td className="p-5">{order._id.substring(20, 24)}</td>
-									<td className="p-5">{order.createdAt.substring(0, 10)}</td>
+									<td className="p-5">
+										{format(parseISO(order.createdAt), 'MMMM do, yyyy')}
+									</td>
 									<td className="p-5">${order.totalCost}</td>
 									<td className="p-5">
-										{order.isPaid ? `${order.paidOn.substring(0, 10)}` : 'not paid'}
+										{order.isPaid
+											? `${format(parseISO(order.paidOn), 'MMMM do, yyyy')}`
+											: 'not paid'}
 									</td>
 									<td className=" p-5 ">
 										{order.isDelivered
-											? `${order.deliveredOn.substring(0, 10)}`
+											? `${format(parseISO(order.deliveredOn), 'MMMM do, yyyy')}`
 											: 'not delivered'}
 									</td>
 									<td className=" p-5 ">
 										<Link href={`/order/${order._id}`} passHref>
-											<a className="underline">Details</a>
+											<a>Details</a>
 										</Link>
 									</td>
 								</tr>
