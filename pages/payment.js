@@ -86,4 +86,6 @@ const PaymentPage = () => {
 	);
 };
 
+PaymentPage.auth = true;
+
 export default PaymentPage;
