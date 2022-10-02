@@ -56,7 +56,7 @@ const NavigationHeader = () => {
 						) : session?.user ? (
 							<Menu as="div" className="relative inline-block">
 								<Menu.Button className="text-blue-800">{session.user.name}</Menu.Button>
-								<Menu.Items className="absolute right-0 w-56 origin-top-right rounded bg-white shadow-lg">
+								<Menu.Items className="absolute right-0 w-56 origin-top-right rounded bg-white p-1 shadow-lg">
 									<Menu.Item>
 										<DropdownLink className="dropdown-link" href="/profile">
 											Profile
