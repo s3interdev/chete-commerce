@@ -80,7 +80,7 @@ const AdminDashboardPage = () => {
 					<ul className="space-y-2">
 						<li>
 							<Link href="/admin/dashboard">
-								<a className="mb-5 text-xl">Administrative Links</a>
+								<a className="mb-5 text-xl">Administrative Dashboard</a>
 							</Link>
 						</li>
 						<li>
@@ -102,7 +102,7 @@ const AdminDashboardPage = () => {
 				</div>
 
 				<div className="md:col-span-3">
-					<h1 className="mb-5 text-xl">Administrative Dashboard</h1>
+					<h1 className="mb-5 text-xl">Dashboard</h1>
 					{loading ? (
 						<div>Loading...</div>
 					) : error ? (
