@@ -101,12 +101,13 @@ const AdminProductsPage = () => {
 											<td className="p-5">{product.rating}</td>
 											<td className="p-5">
 												<Link href={`/admin/product/${product._id}`}>
-													<a>Edit</a>
+													<a type="button" className="default-button m-1 uppercase">
+														Edit
+													</a>
 												</Link>
-												&nbsp;
-												<span>|</span>
-												&nbsp;
-												<button>Delete</button>
+												<button type="button" className="default-button m-1 uppercase">
+													Delete
+												</button>
 											</td>
 										</tr>
 									))}
