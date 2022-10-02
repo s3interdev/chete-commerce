@@ -55,8 +55,8 @@ const NavigationHeader = () => {
 							'Loading'
 						) : session?.user ? (
 							<Menu as="div" className="relative inline-block">
-								<Menu.Button className="text-blue-500">{session.user.name}</Menu.Button>
-								<Menu.Items className="absolute right-0 w-56 origin-top-right rounded bg-white shadow-lg">
+								<Menu.Button className="text-blue-800">{session.user.name}</Menu.Button>
+								<Menu.Items className="absolute right-0 w-56 origin-top-right rounded bg-white p-1 shadow-lg">
 									<Menu.Item>
 										<DropdownLink className="dropdown-link" href="/profile">
 											Profile
@@ -67,6 +67,13 @@ const NavigationHeader = () => {
 											Order History
 										</DropdownLink>
 									</Menu.Item>
+									{session.user.isAdmin && (
+										<Menu.Item>
+											<DropdownLink className="dropdown-link" href="/admin/dashboard">
+												Admin Dashboard
+											</DropdownLink>
+										</Menu.Item>
+									)}
 									<Menu.Item>
 										<a className="dropdown-link" href="#" onClick={signoutClickHandler}>
 											Sign out
