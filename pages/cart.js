@@ -45,7 +45,7 @@ const CartPage = () => {
 				<div>
 					Your cart is empty,{' '}
 					<Link href="/">
-						<a className="hover:underline">please buy something.</a>
+						<a className="underline">please buy something.</a>
 					</Link>
 				</div>
 			) : (
