@@ -1,6 +1,6 @@
 {
 	"name": "next-tailwind-starter",
-	"version": "1.19.35",
+	"version": "1.19.36",
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
