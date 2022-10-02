@@ -1,7 +1,6 @@
 import { useEffect, useReducer } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
-import { format, parseISO } from 'date-fns';
 import Layout from '../../components/layout';
 import { getError } from '../../lib/error';
 
@@ -10,7 +9,7 @@ function reducer(state, action) {
 		case 'FETCH_REQUEST':
 			return { ...state, loading: true, error: '' };
 		case 'FETCH_SUCCESS':
-			return { ...state, loading: false, orders: action.payload, error: '' };
+			return { ...state, loading: false, products: action.payload, error: '' };
 		case 'FETCH_FAIL':
 			return { ...state, loading: false, error: action.payload };
 		default:
@@ -18,10 +17,10 @@ function reducer(state, action) {
 	}
 }
 
-const AdminOrdersPage = () => {
-	const [{ loading, error, orders }, dispatch] = useReducer(reducer, {
+const AdminProductsPage = () => {
+	const [{ loading, error, products }, dispatch] = useReducer(reducer, {
 		loading: true,
-		orders: [],
+		products: [],
 		error: '',
 	});
 
@@ -30,7 +29,7 @@ const AdminOrdersPage = () => {
 			try {
 				dispatch({ type: 'FETCH_REQUEST' });
 
-				const { data } = await axios.get(`/api/admin/orders`);
+				const { data } = await axios.get(`/api/admin/products`);
 
 				dispatch({ type: 'FETCH_SUCCESS', payload: data });
 			} catch (err) {
@@ -42,7 +41,7 @@ const AdminOrdersPage = () => {
 	}, []);
 
 	return (
-		<Layout title="Administrative Dashboard Orders">
+		<Layout title="Administrative Dashboard Products">
 			<div className="grid md:grid-cols-4 md:gap-5">
 				<div>
 					<ul className="space-y-2">
@@ -53,12 +52,12 @@ const AdminOrdersPage = () => {
 						</li>
 						<li>
 							<Link href="/admin/orders">
-								<a className="text-lg font-semibold">Orders</a>
+								<a className="text-lg">Orders</a>
 							</Link>
 						</li>
 						<li>
 							<Link href="/admin/products">
-								<a className="text-lg">Products</a>
+								<a className="text-lg font-semibold">Products</a>
 							</Link>
 						</li>
 						<li>
@@ -70,7 +69,7 @@ const AdminOrdersPage = () => {
 				</div>
 
 				<div className="overflow-x-auto md:col-span-3">
-					<h1 className="mb-5 text-xl">Orders</h1>
+					<h1 className="mb-5 text-xl">Products</h1>
 
 					{loading ? (
 						<div>Loading...</div>
@@ -82,40 +81,32 @@ const AdminOrdersPage = () => {
 								<thead className="border-b">
 									<tr>
 										<th className="px-5 text-left">ID</th>
-										<th className="p-5 text-left">User</th>
-										<th className="p-5 text-left">Date</th>
-										<th className="p-5 text-left">Total</th>
-										<th className="p-5 text-left">Paid</th>
-										<th className="p-5 text-left">Delivered</th>
-										<th className="p-5 text-left">Action</th>
+										<th className="p-5 text-left">Name</th>
+										<th className="p-5 text-left">Price</th>
+										<th className="p-5 text-left">Category</th>
+										<th className="p-5 text-left">Count</th>
+										<th className="p-5 text-left">Rating</th>
+										<th className="p-5 text-left">Actions</th>
 									</tr>
 								</thead>
 
 								<tbody>
-									{orders.map((order) => (
-										<tr key={order._id} className="border-b">
-											<td className="p-5">{order._id.substring(20, 24)}</td>
+									{products.map((product) => (
+										<tr key={product._id} className="border-b">
+											<td className="p-5">{product._id.substring(20, 24)}</td>
+											<td className="p-5">{product.name}</td>
+											<td className="p-5">${product.price}</td>
+											<td className="p-5">{product.category}</td>
+											<td className="p-5">{product.numberInStock}</td>
+											<td className="p-5">{product.rating}</td>
 											<td className="p-5">
-												{order.user ? order.user.name : 'Test User'}
-											</td>
-											<td className="p-5">
-												{format(parseISO(order.createdAt), 'MMMM do, yyyy')}
-											</td>
-											<td className="p-5">${order.totalCost}</td>
-											<td className="p-5">
-												{order.isPaid
-													? `${format(parseISO(order.paidOn), 'MMMM do, yyyy')}`
-													: 'not paid'}
-											</td>
-											<td className="p-5">
-												{order.isDelivered
-													? `${format(parseISO(order.deliveredOn), 'MMMM do, yyyy')}`
-													: 'not delivered'}
-											</td>
-											<td className="p-5">
-												<Link href={`/order/${order._id}`} passHref>
-													<a>Details</a>
+												<Link href={`/admin/product/${product._id}`}>
+													<a>Edit</a>
 												</Link>
+												&nbsp;
+												<span>|</span>
+												&nbsp;
+												<button>Delete</button>
 											</td>
 										</tr>
 									))}
@@ -129,6 +120,6 @@ const AdminOrdersPage = () => {
 	);
 };
 
-AdminOrdersPage.auth = { adminOnly: true };
+AdminProductsPage.auth = { adminOnly: true };
 
-export default AdminOrdersPage;
+export default AdminProductsPage;
